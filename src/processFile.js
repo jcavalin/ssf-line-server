@@ -4,12 +4,14 @@ import { preprocessFile } from './services/processFileService.js';
 
 console.time('Running time');
 
-let filePath = process.argv[2];
+const filePath = process.argv[2];
 console.log('Processing file', filePath);
 
-preprocessFile(filePath);
+const lastLineNumber = preprocessFile(filePath);
 
+process.stdout.write('\n');
 console.log('Finished!');
+console.log(`${lastLineNumber} lines processed`);
 console.timeEnd('Running time');
 
 const used = process.memoryUsage().heapUsed / 1024 / 1024;

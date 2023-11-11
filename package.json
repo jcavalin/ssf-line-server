@@ -8,7 +8,7 @@
     "start": "node ./src/app.js",
     "dev": "nodemon ./src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "process-file": "node ./src/preprocessFile.js"
+    "process-file": "node ./src/processFile.js"
   },
   "keywords": [
     "js",
