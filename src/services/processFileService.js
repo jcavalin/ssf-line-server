@@ -1,4 +1,5 @@
-import { getFileRange, getSubdirectoryRange } from "./fileIndexService.js";
+import { getSubdirectoryRange } from "./fileIndexService.js";
+import { getSubdirectoryByLineNumber, createDirectory, getFileFullPathByLineNumber } from "./fileService.js";
 import fileConfig from "../config/fileConfig.js";
 import nReadlines from 'n-readlines';
 import fs from 'fs';
@@ -28,18 +29,6 @@ function preprocessFile(filePath) {
     return lineNumber - 1;
 }
 
-function getFileByLineNumber(lineNumber) {
-    let {from, to} = getFileRange(lineNumber);
-    
-    return `file_${from}_${to}.txt`;
-}
-
-function getSubdirectoryByLineNumber(lineNumber) {
-    let {from, to} = getSubdirectoryRange(lineNumber);
-
-    return `${from}_${to}`;
-}
-
 function showProgress(lineNumber, fileFullPath, updateProgressEachLines = 10000) {
     if (lineNumber % updateProgressEachLines != 0) {
         return;
@@ -55,23 +44,6 @@ function showProgress(lineNumber, fileFullPath, updateProgressEachLines = 10000)
     
     if (to == lineNumber) {
         process.stdout.write('\n');
-    }
-}
-
-function getFileFullPathByLineNumber(lineNumber) {
-    let filenameByLine = getFileByLineNumber(lineNumber);
-    let subdirectoryByLine = getSubdirectoryByLineNumber(lineNumber);
-
-    return `${fileConfig.indexedFileDirectory}/${subdirectoryByLine}/${filenameByLine}`;
-}
-
-function createDirectory(directoryPath, removeIfExists) {
-    if (removeIfExists) {
-        fs.rmSync(directoryPath, {recursive: true, force: true});
-    }
-
-    if(!fs.existsSync(directoryPath)) {
-        fs.mkdirSync(directoryPath);
     }
 }
 

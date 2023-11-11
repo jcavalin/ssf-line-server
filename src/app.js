@@ -1,14 +1,28 @@
 'use strict';
 
 import express from 'express';
-import {env} from 'node:process';
+import { env } from 'node:process';
+import { getLineContent } from './services/readFileService.js';
 
 const app = express();
 
-app.use(express.json());
+app.get('/lines/:lineIndex(\\d+)', (req, res) => {
+    const lineContet = getLineContent(req.params.lineIndex);
 
-app.get('/lines/:lineIndex', (req, res) => {
-    res.send('GET ' + req.params.lineIndex);
+    if (!lineContet) {
+        res.status(413).send();
+        return;
+    }
+
+    res.status(200)
+        .setHeader('content-type', 'text/plain')
+        .send(lineContet);
+});
+
+// catch 404
+app.use(function(req, res, next) {
+    res.status(404).send('Not Found');
+    next();
 });
 
 const PORT = env.APP_PORT || 80;
