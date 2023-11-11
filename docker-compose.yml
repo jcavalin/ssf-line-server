@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+
+  application:
+    build: .
+    ports:
+      - "80:80"
+    # depends_on:
+    #   - db
+      # - flyway
+    environment:
+      APP_PORT: 80
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_DATABASE: app
+      DB_USERNAME: mysql
+      DB_PASSWORD: mypass
+    volumes:
+      - .:/usr/app
+
+  # db:
+  #   image: mysql:8.1.0
+  #   command: --default-authentication-plugin=caching_sha2_password
+  #   environment:
+  #     MYSQL_USER: mysql
+  #     MYSQL_PASSWORD: mypass
+  #     MYSQL_ROOT_PASSWORD: myrootpass
+  #     MYSQL_DATABASE: app
+  #   ports:
+  #     - "3306:3306"
+
+  # flyway:
+  #   image: flyway/flyway:9.22.1
+  #   command: -url=jdbc:mysql://db -schemas=app -user=mysql -password=mypass -connectRetries=60 migrate
+  #   volumes:
+  #     - ./migrations:/flyway/sql
+  #   depends_on:
+  #     - db
