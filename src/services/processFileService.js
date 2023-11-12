@@ -5,7 +5,15 @@ import nReadlines from 'n-readlines';
 import fs from 'fs';
 
 function preprocessFile(filePath) {
-    const broadbandLines = new nReadlines(filePath);
+    let broadbandLines;
+
+    try {
+        broadbandLines = new nReadlines(filePath);
+    } catch (e) {
+        console.error(`ERROR: Cannot read file ${filePath}`);
+        return null;
+    }
+
     createDirectory(fileConfig.indexedFileDirectory, true);
 
     let lineNumber = 1;
