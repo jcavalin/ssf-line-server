@@ -1,6 +1,6 @@
-import { getFileRange } from "./fileIndexService.js";
-import { getFullFilePathByLineNumber } from "./fileService.js";
-import nReadlines from "n-readlines";
+import { getFileRange } from './fileIndexService.js';
+import { getFullFilePathByLineNumber } from './fileService.js';
+import nReadlines from 'n-readlines';
 
 function getLineContent(lineNumber) {
     lineNumber = parseInt(lineNumber);

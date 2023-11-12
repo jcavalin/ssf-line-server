@@ -1,5 +1,5 @@
-import { getFileRange, getSubdirectoryRange } from "./fileIndexService.js";
-import fileConfig from "../config/fileConfig.js";
+import { getFileRange, getSubdirectoryRange } from './fileIndexService.js';
+import fileConfig from '../config/fileConfig.js';
 import fs from 'fs';
 
 function getFullFilePathByLineNumber(lineNumber) {

@@ -1,8 +1,8 @@
-import { getSubdirectoryRange } from "./fileIndexService.js";
-import { getSubdirectoryByLineNumber, createDirectory, getFullFilePathByLineNumber } from "./fileService.js";
-import fileConfig from "../config/fileConfig.js";
-import nReadlines from "n-readlines";
-import fs from "fs";
+import { getSubdirectoryRange } from './fileIndexService.js';
+import { getSubdirectoryByLineNumber, createDirectory, getFullFilePathByLineNumber } from './fileService.js';
+import fileConfig from '../config/fileConfig.js';
+import nReadlines from 'n-readlines';
+import fs from 'fs';
 
 function preprocessFile(filePath) {
     let liner;
