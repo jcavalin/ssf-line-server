@@ -7,7 +7,7 @@ import { getLineContent } from './services/readFileService.js';
 const app = express();
 
 app.get('/lines/:lineIndex(\\d+)', (req, res) => {
-    const lineContet = req.params.lineIndex; //getLineContent(req.params.lineIndex);
+    const lineContet = getLineContent(req.params.lineIndex);
 
     if (!lineContet) {
         res.status(413).send();
