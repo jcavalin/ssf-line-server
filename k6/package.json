@@ -4,9 +4,7 @@
   "description": "K6 testing",
   "main": "index.js",
   "scripts": {
-    "test-100": "k6 run index.js --vus 100 --duration 60s",
-    "test-10000": "k6 run index.js --vus 10000 --duration 60s",
-    "test-100000": "k6 run index.js --vus 100000 --duration 60s"
+    "test": "k6 run scenarios/getLastLine.js --vus 100000 --duration 60s"
   },
   "author": "Julio Cavalin",
   "license": "ISC",

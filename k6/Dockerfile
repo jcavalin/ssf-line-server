@@ -11,4 +11,4 @@ WORKDIR /usr/app
 COPY . .
 RUN npm install
 
-CMD [ "npm", "run", "test-100000" ]
+CMD [ "npm", "run", "test" ]

@@ -51,4 +51,14 @@ describe('Get line', () => {
         expect(getLineContent(538686)).to.be.equal('4TPsUpM7HFl5I7?EB6QjF.vur6FTCmCbuAvdJ!,cAgQDFC8HCXjeir5UbromoknHBCpLygwGfOnhZQfKR5IJtcj9?3P7H.k0eeYN7iW38vNCovp9NwA7kL846fty7 15e5?nTpkPAvHGg K!XvizZORKg85BUOEJKqilUYMdBkF,wEwtxurHQAck V.5JGrNZ?WTD.QwdDrTfF');
         done();
     });
+
+    it('Index 538687', (done) => {
+        expect(getLineContent(538687)).to.be.equal(null);
+        done();
+    });
+
+    it('Index 600000', (done) => {
+        expect(getLineContent(600000)).to.be.equal(null);
+        done();
+    });
 });

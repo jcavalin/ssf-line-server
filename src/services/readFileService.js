@@ -10,19 +10,24 @@ function getLineContent(lineNumber) {
     try {
         broadbandLines = new nReadlines(filePath);
     } catch (e) {
-        console.error(`Cannot read file ${filePath}`);
         return null;
     }
     
+    let found = false;
     let lineContet;
     let currentLine = from;
     while (lineContet = broadbandLines.next()) {
         if (parseInt(lineNumber) == currentLine) {
             lineContet = lineContet.toString();
+            found = true;
             break;
         }
 
         currentLine++;
+    }
+
+    if (!found) {
+        return null;
     }
 
     return lineContet;
