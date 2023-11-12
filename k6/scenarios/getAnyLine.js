@@ -9,7 +9,7 @@ export const getLineRequests = new Counter('get_any_line_requests');
 
 export default () => {
     group('Get any line', () => {
-        const maxLineIndex = 1579096210;
+        const maxLineIndex = 15793547;
         
         const lineIndex = Math.floor((Math.random() * maxLineIndex) + 1);
         const res = http.get(`http://127.0.0.1/lines/${lineIndex}`, {tags: { name: 'Get any line' }});
