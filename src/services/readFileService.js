@@ -7,9 +7,9 @@ function getLineContent(lineNumber) {
     const filePath = getFullFilePathByLineNumber(lineNumber);
     const {from} = getFileRange(lineNumber);
     
-    let readLines;
+    let liner;
     try {
-        readLines = new nReadlines(filePath);
+        liner = new nReadlines(filePath);
     } catch (e) {
         return null;
     }
@@ -17,7 +17,7 @@ function getLineContent(lineNumber) {
     let found = false;
     let lineContent;
     let currentLine = from;
-    while (lineContent = readLines.next()) {
+    while (lineContent = liner.next()) {
         if (lineNumber == currentLine) {
             lineContent = lineContent.toString();
             found = true;

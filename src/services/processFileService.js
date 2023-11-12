@@ -5,10 +5,10 @@ import nReadlines from "n-readlines";
 import fs from "fs";
 
 function preprocessFile(filePath) {
-    let readLines;
+    let liner;
 
     try {
-        readLines = new nReadlines(filePath);
+        liner = new nReadlines(filePath);
     } catch (e) {
         console.error(`ERROR: Cannot read file ${filePath}`);
         return null;
@@ -19,7 +19,7 @@ function preprocessFile(filePath) {
     let lineNumber = 1;
     let lineContent;
     let subdirectory;
-    while (lineContent = readLines.next()) {
+    while (lineContent = liner.next()) {
         const subdirectoryByLine = getSubdirectoryByLineNumber(lineNumber);
         if (subdirectoryByLine != subdirectory) {
             subdirectory = subdirectoryByLine;
