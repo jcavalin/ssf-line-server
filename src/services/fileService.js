@@ -2,7 +2,7 @@ import { getFileRange, getSubdirectoryRange } from "./fileIndexService.js";
 import fileConfig from "../config/fileConfig.js";
 import fs from 'fs';
 
-function getFileFullPathByLineNumber(lineNumber) {
+function getFullFilePathByLineNumber(lineNumber) {
     const filenameByLine = getFileByLineNumber(lineNumber);
     const subdirectoryByLine = getSubdirectoryByLineNumber(lineNumber);
 
@@ -32,7 +32,7 @@ function createDirectory(directoryPath, removeIfExists) {
 }
 
 export {
-    getFileFullPathByLineNumber,
+    getFullFilePathByLineNumber,
     getFileByLineNumber,
     getSubdirectoryByLineNumber,
     createDirectory

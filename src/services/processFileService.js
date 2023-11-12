@@ -1,5 +1,5 @@
 import { getSubdirectoryRange } from "./fileIndexService.js";
-import { getSubdirectoryByLineNumber, createDirectory, getFileFullPathByLineNumber } from "./fileService.js";
+import { getSubdirectoryByLineNumber, createDirectory, getFullFilePathByLineNumber } from "./fileService.js";
 import fileConfig from "../config/fileConfig.js";
 import nReadlines from 'n-readlines';
 import fs from 'fs';
@@ -18,7 +18,7 @@ function preprocessFile(filePath) {
             createDirectory(`${fileConfig.indexedFileDirectory}/${subdirectory}`, false);
         }
         
-        let fileFullPath = getFileFullPathByLineNumber(lineNumber);
+        let fileFullPath = getFullFilePathByLineNumber(lineNumber);
         fs.appendFileSync(fileFullPath, lineContent + '\n');
         
         showProgress(lineNumber, fileFullPath);
@@ -33,8 +33,8 @@ function showProgress(lineNumber, fileFullPath, updateProgressEachLines = 10000)
         return;
     }
 
-    const {to} = getSubdirectoryRange(lineNumber);
-    const progressNumber = Math.trunc((lineNumber * 100) / to);
+    const {from, to} = getSubdirectoryRange(lineNumber);
+    const progressNumber = Math.trunc(((lineNumber - from) * 100) / (to - from));
     const progress = new Array(progressNumber + 1).join('#');
 
     process.stdout.cursorTo(0);

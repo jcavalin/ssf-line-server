@@ -1,9 +1,9 @@
 import { getFileRange } from "./fileIndexService.js";
-import { getFileFullPathByLineNumber } from "./fileService.js";
+import { getFullFilePathByLineNumber } from "./fileService.js";
 import nReadlines from 'n-readlines';
 
 function getLineContent(lineNumber) {
-    const filePath = getFileFullPathByLineNumber(lineNumber);
+    const filePath = getFullFilePathByLineNumber(lineNumber);
     const {from} = getFileRange(lineNumber);
     
     let broadbandLines;
