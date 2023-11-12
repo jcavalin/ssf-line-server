@@ -1,7 +1,8 @@
-FROM node:20.6.1-alpine3.17
+FROM node:21.1.0-bullseye
 
 WORKDIR /usr/app
 
-ADD .docker/start.sh ../
-RUN chmod +x ../start.sh
-CMD [ "../start.sh" ]
+COPY . .
+RUN npm install
+
+CMD [ "npm", "run", "start" ]

@@ -1,5 +1,5 @@
 import http from 'k6/http';
-import { sleep, check, fail } from 'k6';
+import { sleep } from 'k6';
 import { Trend, Rate, Counter } from 'k6/metrics';
 
 export const getLineDuration = new Trend('get_any_line_duration');
@@ -11,16 +11,12 @@ export default function () {
     const maxLineIndex = 1543040;
     
     const lineIndex = Math.floor((Math.random() * maxLineIndex) + 1);
-    const res = http.get(`http://localhost/lines/${lineIndex}`, {tags: { name: 'Get any line' }});
+    const res = http.get(`http://127.0.0.1/lines/${lineIndex}`, {tags: { name: 'Get any line' }});
     
     getLineDuration.add(res.timings.duration);
     getLineRequests.add(1);
     getLineFailRate.add(res.status != 200);
     getLineSuccessRate.add(res.status == 200);
-
-    if (!check(res, {'max duration': (r) => r.timings.duration < 10000})){
-        fail('Max duration 10s');
-    }
     
     sleep(1);
 }

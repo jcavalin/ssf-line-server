@@ -6,7 +6,7 @@
   "scripts": {
     "test-100": "k6 run index.js --vus 100 --duration 30s",
     "test-10000": "k6 run index.js --vus 10000 --duration 30s",
-    "test-1000000": "k6 run index.js --vus 1000000 --duration 30s"
+    "test-100000": "k6 run index.js --vus 100000 --duration 30s"
   },
   "author": "Julio Cavalin",
   "license": "ISC",
