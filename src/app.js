@@ -9,7 +9,7 @@ const app = express();
 app.get('/lines/:lineIndex(\\d+)', (req, res) => {
     const lineContet = getLineContent(req.params.lineIndex);
 
-    if (!lineContet) {
+    if (lineContet === null) {
         res.status(413).send();
         return;
     }

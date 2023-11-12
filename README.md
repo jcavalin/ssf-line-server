@@ -7,6 +7,7 @@ https://www.npmjs.com/package/n-readlines
 https://stackoverflow.com/a/70469327
 https://k6.io/docs/
 
+tr -dc '\n ,.?a-zA-Z0-9!' </dev/urandom | head -c 36700160 > tests/fixtures/sample.txt 
 tr -dc '\n ,.?a-zA-Z0-9!' </dev/urandom | head -c 10485760 > test_files/sample_10mb.txt 
 tr -dc '\n ,.?a-zA-Z0-9!' </dev/urandom | head -c 104857600 > test_files/sample_100mb.txt 
 tr -dc '\n ,.?a-zA-Z0-9!' </dev/urandom | head -c 1073741824 > test_files/sample_1gb.txt 

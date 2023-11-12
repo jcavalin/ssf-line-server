@@ -18,6 +18,7 @@ function getLineContent(lineNumber) {
     let currentLine = from;
     while (lineContet = broadbandLines.next()) {
         if (parseInt(lineNumber) == currentLine) {
+            lineContet = lineContet.toString();
             break;
         }
 
