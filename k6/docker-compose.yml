@@ -1,11 +1,12 @@
 version: '3.8'
 
 services:
+
   test:
     build: .
+    network_mode: 'host'
     deploy:
       resources:
         limits:
-          cpus: '2'
-          memory: '6GB'
-    network_mode: 'host'
+          cpus: '4'
+          memory: '16GB'
