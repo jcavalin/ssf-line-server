@@ -1,14 +1,14 @@
 import { getSubdirectoryRange } from "./fileIndexService.js";
 import { getSubdirectoryByLineNumber, createDirectory, getFullFilePathByLineNumber } from "./fileService.js";
 import fileConfig from "../config/fileConfig.js";
-import nReadlines from 'n-readlines';
-import fs from 'fs';
+import nReadlines from "n-readlines";
+import fs from "fs";
 
 function preprocessFile(filePath) {
-    let broadbandLines;
+    let readLines;
 
     try {
-        broadbandLines = new nReadlines(filePath);
+        readLines = new nReadlines(filePath);
     } catch (e) {
         console.error(`ERROR: Cannot read file ${filePath}`);
         return null;
@@ -19,7 +19,7 @@ function preprocessFile(filePath) {
     let lineNumber = 1;
     let lineContent;
     let subdirectory;
-    while (lineContent = broadbandLines.next()) {
+    while (lineContent = readLines.next()) {
         const subdirectoryByLine = getSubdirectoryByLineNumber(lineNumber);
         if (subdirectoryByLine != subdirectory) {
             subdirectory = subdirectoryByLine;

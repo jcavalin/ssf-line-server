@@ -1,24 +1,25 @@
 import { getFileRange } from "./fileIndexService.js";
 import { getFullFilePathByLineNumber } from "./fileService.js";
-import nReadlines from 'n-readlines';
+import nReadlines from "n-readlines";
 
 function getLineContent(lineNumber) {
+    lineNumber = parseInt(lineNumber);
     const filePath = getFullFilePathByLineNumber(lineNumber);
     const {from} = getFileRange(lineNumber);
     
-    let broadbandLines;
+    let readLines;
     try {
-        broadbandLines = new nReadlines(filePath);
+        readLines = new nReadlines(filePath);
     } catch (e) {
         return null;
     }
     
     let found = false;
-    let lineContet;
+    let lineContent;
     let currentLine = from;
-    while (lineContet = broadbandLines.next()) {
-        if (parseInt(lineNumber) == currentLine) {
-            lineContet = lineContet.toString();
+    while (lineContent = readLines.next()) {
+        if (lineNumber == currentLine) {
+            lineContent = lineContent.toString();
             found = true;
             break;
         }
@@ -30,7 +31,7 @@ function getLineContent(lineNumber) {
         return null;
     }
 
-    return lineContet;
+    return lineContent;
 }
 
 export {

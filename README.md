@@ -18,6 +18,21 @@ tr -dc '\n ,.?a-zA-Z0-9!' </dev/urandom | head -c 107374182400 > test_files/samp
 
 How does your system work? (if not addressed in comments in source)
 How will your system perform with a 1 GB file? a 10 GB file? a 100 GB file?
+1 GB ->
+Process: 2:17.88
+Running (100k users): 
+    get_any_line_duration..........: avg=10285.136653 min=0        med=5002.233872 max=60497.879252 p(90)=25775.767814 p(95)=50255.289379
+    get_any_line_fail_rate.........: 7.24%  ✓ 5405       ✗ 69243   
+    get_any_line_requests..........: 74648  829.348996/s
+    get_any_line_success_rate......: 92.75% ✓ 69243      ✗ 5405    
+
+
+10 GB -> 
+
+
+100 GB -> 
+
+
 How will your system perform with 100 users? 10000 users? 1000000 users?
 What documentation, websites, papers, etc did you consult in doing this assignment?
 What third-party libraries or other tools does the system use? How did you choose each library or framework you used?

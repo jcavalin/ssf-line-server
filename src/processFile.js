@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { preprocessFile } from './services/processFileService.js';
 
 console.time('Running time');
