@@ -1,0 +1,1 @@
+k6 run index.js --vus 20 --duration 60s
