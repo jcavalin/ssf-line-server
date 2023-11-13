@@ -85,21 +85,6 @@ npm install
 npm run test
 ```
 
-### Running load tests
-```
-cd load-tests
-npm install
-npm run test
-```
-<sub>**Note**: It's necessary to install k6: https://k6.io/docs/get-started/installation/
-
-Or use the container:
-
-```
-cd load-tests
-docker-compose up --build
-```
-
 ### Build and run
 ```
 ./buid.sh
