@@ -90,7 +90,7 @@ cd load-tests
 npm install
 npm run test
 ```
-<sub>**Note**: It's necessary to install (k6)[https://k6.io/docs/get-started/installation/].
+<sub>**Note**: It's necessary to install k6: https://k6.io/docs/get-started/installation/
 
 Or use the container:
 
