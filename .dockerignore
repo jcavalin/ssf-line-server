@@ -1,7 +1,7 @@
 logs/
 node_modules/
 test_files/
-k6/
+load-tests/
 
 Dockerfile
 docker-compose.yml
