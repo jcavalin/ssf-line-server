@@ -4,9 +4,9 @@ import fileConfig from '../config/fileConfig.js';
 import nReadlines from 'n-readlines';
 import fs from 'fs';
 
-function preprocessFile(filePath) {
+function preprocessFile(filePath, from, to) {
     let liner;
-
+    
     try {
         liner = new nReadlines(filePath);
     } catch (e) {
@@ -14,12 +14,22 @@ function preprocessFile(filePath) {
         return null;
     }
 
-    createDirectory(fileConfig.indexedFileDirectory, true);
-
     let lineNumber = 1;
     let lineContent;
     let subdirectory;
+    let hasNextLine = false;
     while (lineContent = liner.next()) {
+
+        if (from && lineNumber < from) {
+            lineNumber++;
+            continue;
+        }
+
+        if (to && lineNumber > to) {
+            hasNextLine = true;
+            break;
+        }
+        
         const subdirectoryByLine = getSubdirectoryByLineNumber(lineNumber);
         if (subdirectoryByLine != subdirectory) {
             subdirectory = subdirectoryByLine;
@@ -29,11 +39,11 @@ function preprocessFile(filePath) {
         let fileFullPath = getFullFilePathByLineNumber(lineNumber);
         fs.appendFileSync(fileFullPath, lineContent + '\n');
         
-        showProgress(lineNumber, fileFullPath);
+        // showProgress(lineNumber, fileFullPath);
         lineNumber++;
     }
 
-    return lineNumber - 1;
+    return {lastLineNumber: lineNumber - 1,  hasNextLine};
 }
 
 function showProgress(lineNumber, fileFullPath, updateProgressEachLines = 10000) {
