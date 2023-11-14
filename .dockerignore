@@ -2,6 +2,7 @@ logs/
 node_modules/
 test_files/
 load-tests/
+indexed_file_100g/
 
 Dockerfile
 docker-compose.yml

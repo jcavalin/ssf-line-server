@@ -7,9 +7,9 @@ Although the preprocess could be very time-consuming depending on the size of th
 ## How will your system perform with a 1 GB file? a 10 GB file? a 100 GB file?
 |        | Time to load | Requests             | Success Rate     | Fail Rate      | Average Response time |
 |--------|--------------|----------------------|------------------|----------------|-----------------------|
-| 1 GB   | 00:01:51.90  | 84,061 (1,345.36/s)  | 99.80% (83,901)  | 0.19% (160)    | 6.698s                |
+| 1 GB   | 00:01:51.90  | 117,664 (1,872.95/s) | 99.97% (117,663) | 0.02% (31)     | 3.658s                |
 | 10 GB  | 00:24:59.99  | 118,178 (1,873.27/s) | 99.98% (118,156) | 0.01% (22)     | 3.712s                |
-| *100 GB| 03:07:14.24  | 66,243 (736.01/s)    | 87.94% (58,258)  | 12.05% (7,985) | 12.238s               |
+| 100 GB | 03:07:14.24  | 126,371 (2,009.70/s) | 99.98% (126,358) | 0.01% (13)     | 4.262s                |
 
 <sub>**Note**: 100k users performing the test for 60 seconds with random line index.
 
@@ -19,7 +19,7 @@ Although the preprocess could be very time-consuming depending on the size of th
 | 100       | 6,000 (99.42/s)      | 100.00% (6,000)   | 0.00% (0)     | 0.002s                |
 | 1,000     | 60,000 (990.45/s)    | 100.00% (60,000)  | 0.00% (0)     | 0.003s                |
 | 10,000    | 486,116 (7,908.50/s) | 100.00% (486,116) | 0.00% (0)     | 0.206s                |
-| 100,000   | 80,637 (1,284.99/s)  | 99.95% (80,598)   | 0.04% (39)    | 6.936s                |
+| 100,000   | 117,664 (1,872.95/s) | 99.97% (117,663)  | 0.02% (31)    | 3.658s                |
 | 1,000,000 | N/A                  | N/A               | N/A           | N/A                   |
 
 <sub>**Note**: Performing the test for 60 seconds with random line index and 1GB file.
@@ -52,7 +52,7 @@ Among the options that I found to create loading tests, this one caught my eye b
 Around 17h. First I would prioritize the preprocess, because depending on the size of the file it takes a long time, maybe use another tool just to process the file in chunks asynchronously. After that, I would invest some time on the webserver, specifically in the infra part creating more than one instance for the system and adding a load balancer to them. Last but not least I think it would be nice to improve the load tests and the unit testing, creating more scenarios and organizing better the load tests.
 
 ## If you were to critique your code, what would you have to say about it?
-In my opinion, it would be better to use a database to store the data of the file, which could be SQL or NoSQL. For this scenario I think a NoSQL would fit better since there is no relation between the data and the key is well established. Besides, node is not the best choice when processing large files, so changing it to another language could improve the time to preprocess the file.
+In my opinion, it would be better to use a database to store the data of the file, which could be SQL or NoSQL. For this scenario I think a NoSQL would fit better since there is no relation between the data and the key is well established. The database could improve the reliability of storing and getting the data. Besides, node is not the best choice when processing large files, so changing it to another language could improve the time to preprocess the file.
 Other than that, the system is not prepared to fail to recover, if something goes wrong while processing the file, all the progress will be lost.
 Other important thing is lack of the logs, it would be helpful to have proper logs to identify any issue.
 

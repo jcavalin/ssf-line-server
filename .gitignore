@@ -45,6 +45,7 @@ node_modules/
 jspm_packages/
 test_files/
 indexed_file/
+indexed_file_100g/
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
