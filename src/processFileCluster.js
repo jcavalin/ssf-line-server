@@ -4,6 +4,7 @@ import os from 'os';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { getSubdirectoryRange } from './services/fileIndexService.js';
+import fileConfig from './config/fileConfig.js';
 
 const filePath = process.argv[2];
 
@@ -21,7 +22,7 @@ const WORKERS = process.env.CLUSTER_WORKERS || os.cpus().length;
 let finished = false;
 let workersCreated = [];
 
-const linesPerCluster = 10000000;
+const linesPerCluster = 100 * fileConfig.linesPerFile * fileConfig.filesPerDirectory;
 let from = 1;
 let to = linesPerCluster;
 
@@ -43,7 +44,7 @@ const startWorker = (fromWorker, toWorker) => {
 
     console.log(`[PRIMARY] Starting new worker ${workerLabel}`);
     setupPrimary({
-        exec: __dirname + '/processFileWorker.js',
+        exec: __dirname + '/processFile.js',
         args: [filePath, fromWorker, toWorker]
     });
     cluster.fork();
@@ -58,10 +59,10 @@ for (let i = 0; i < WORKERS; i++) {
     startWorker(from, to);
 }
 
-cluster.on('exit', (worker, code, signal) => {
-    console.log(`[WORKER ${worker.process.spawnargs[3]}_${worker.process.spawnargs[4]}] died: code ${code} signal ${signal}`);
+cluster.on('exit', (worker, code) => {
+    console.log(`[WORKER ${worker.process.spawnargs[3]}_${worker.process.spawnargs[4]}] died: code ${code}`);
 
-    if (code === 0 && !finished) {
+    if (code === 2 && !finished) {
         startWorker(from, to);
     } else {
         finished = true;

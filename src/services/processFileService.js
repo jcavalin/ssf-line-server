@@ -4,7 +4,7 @@ import fileConfig from '../config/fileConfig.js';
 import nReadlines from 'n-readlines';
 import fs from 'fs';
 
-function preprocessFile(filePath, from, to) {
+function preprocessFile(filePath, processFromLine, processtoLine) {
     let liner;
     
     try {
@@ -20,12 +20,12 @@ function preprocessFile(filePath, from, to) {
     let hasNextLine = false;
     while (lineContent = liner.next()) {
 
-        if (from && lineNumber < from) {
+        if (processFromLine && lineNumber < processFromLine) {
             lineNumber++;
             continue;
         }
 
-        if (to && lineNumber > to) {
+        if (processtoLine && lineNumber > processtoLine) {
             hasNextLine = true;
             break;
         }
@@ -39,7 +39,10 @@ function preprocessFile(filePath, from, to) {
         let fileFullPath = getFullFilePathByLineNumber(lineNumber);
         fs.appendFileSync(fileFullPath, lineContent + '\n');
         
-        // showProgress(lineNumber, fileFullPath);
+        if (!(processFromLine && processtoLine)) {
+            showProgress(lineNumber, fileFullPath);
+        }
+
         lineNumber++;
     }
 
