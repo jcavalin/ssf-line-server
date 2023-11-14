@@ -55,6 +55,7 @@ Around 17h. First I would prioritize the preprocess, because depending on the si
 In my opinion, it would be better to use a database to store the data of the file, which could be SQL or NoSQL. For this scenario I think a NoSQL would fit better since there is no relation between the data and the key is well established. The database could improve the reliability of storing and getting the data. Besides, node is not the best choice when processing large files, so changing it to another language could improve the time to preprocess the file.
 Other than that, the system is not prepared to fail to recover, if something goes wrong while processing the file, all the progress will be lost.
 Other important thing is lack of the logs, it would be helpful to have proper logs to identify any issue.
+Finally, I would like to find another solution instead of just parsing the file line by line, maybe preprocessing and identifying the offsets of each line could be a solution.
 
 ---
 

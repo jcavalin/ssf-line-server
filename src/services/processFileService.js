@@ -14,6 +14,8 @@ function preprocessFile(filePath) {
         return null;
     }
 
+    createDirectory(fileConfig.indexedFileDirectory, true);
+
     let lineNumber = 1;
     let lineContent;
     let subdirectory;
