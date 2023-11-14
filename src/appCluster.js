@@ -19,5 +19,4 @@ for (let i = 0; i < WORKERS; i++) {
 
 cluster.on('exit', (worker, code, signal) => {
     console.log(`Worker ${worker.process.pid} died: code ${code} signal ${signal}`);
-    cluster.fork();
 });
