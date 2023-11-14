@@ -5,22 +5,22 @@ On startup, the system splits the file received by the parameter into multiple s
 Although the preprocess could be very time-consuming depending on the size of the original file, the system can have a consistent time to get any line when offered it by a web server. Another downside of this strategy is that it's necessary to have at least the same amount of free disk space as the size of the original file while processing.
 
 ## How will your system perform with a 1 GB file? a 10 GB file? a 100 GB file?
-|        | Time to load | Requests          | Success Rate    | Fail Rate      | Average Response time |
-|--------|--------------|-------------------|-----------------|----------------|-----------------------|
-| 1 GB   | 00:02:17.88  | 74,648 (829.34/s) | 92.75% (69,243) | 7.24% (5,405)  | 10.285s               |
-| 10 GB  | 00:16:58.32  | 81,911 (910.05/s) | 93.32% (76,446) | 6.67% (5,465)  | 9.336s                |
-| 100 GB | 03:07:14.24  | 66,243 (736.01/s) | 87.94% (58,258) | 12.05% (7,985) | 12.238s               |
+|        | Time to load | Requests             | Success Rate     | Fail Rate      | Average Response time |
+|--------|--------------|----------------------|------------------|----------------|-----------------------|
+| 1 GB   | 00:01:51.90  | 84,061 (1,345.36/s)  | 99.80% (83,901)  | 0.19% (160)    | 6.698s                |
+| 10 GB  | 00:24:59.99  | 118,178 (1,873.27/s) | 99.98% (118,156) | 0.01% (22)     | 3.712s                |
+| *100 GB| 03:07:14.24  | 66,243 (736.01/s)    | 87.94% (58,258)  | 12.05% (7,985) | 12.238s               |
 
 <sub>**Note**: 100k users performing the test for 60 seconds with random line index.
 
 ## How will your system perform with 100 users? 10000 users? 1000000 users?
-| Users     | Requests             | Success Rate     | Fail Rate     | Average Response time |
-|-----------|----------------------|------------------|---------------|-----------------------|
-| 100       | 6,000 (99.42/s)      | 100.00% (6,000)  | 0.00% (0)     | 0.003s                |
-| 1,000     | 59,852 (981.13/s)    | 100.00% (59,852) | 0.00% (0)     | 0.008s                |
-| 10,000    | 270,165 (3,440.47/s) | 97.71% (263,988) | 2.28% (6,177) | 0.688s                |
-| 100,000   | 69,731 (774.110/s)   | 93.48% (65,189)  | 6.51% (4,542) | 10.686s               |
-| 1,000,000 | N/A                  | N/A              | N/A           | N/A                   |
+| Users     | Requests             | Success Rate      | Fail Rate     | Average Response time |
+|-----------|----------------------|-------------------|---------------|-----------------------|
+| 100       | 6,000 (99.42/s)      | 100.00% (6,000)   | 0.00% (0)     | 0.002s                |
+| 1,000     | 60,000 (990.45/s)    | 100.00% (60,000)  | 0.00% (0)     | 0.003s                |
+| 10,000    | 486,116 (7,908.50/s) | 100.00% (486,116) | 0.00% (0)     | 0.206s                |
+| 100,000   | 80,637 (1,284.99/s)  | 99.95% (80,598)   | 0.04% (39)    | 6.936s                |
+| 1,000,000 | N/A                  | N/A               | N/A           | N/A                   |
 
 <sub>**Note**: Performing the test for 60 seconds with random line index and 1GB file.
 
@@ -32,6 +32,8 @@ Although the preprocess could be very time-consuming depending on the size of th
 - [nacholibre/node-readlines](https://github.com/nacholibre/node-readlines)
 - [chaijs API Reference](https://www.chaijs.com/api/)
 - [k6 documentation](https://k6.io/docs/)
+- [How To Scale Node.js Applications with Clustering](https://www.digitalocean.com/community/tutorials/how-to-scale-node-js-applications-with-clustering)
+- [Node.js cluster documentation](https://nodejs.org/api/cluster.html)
 
 ## What third-party libraries or other tools does the system use? How did you choose each library or framework you used?
 ### express
@@ -47,7 +49,7 @@ Chai is a useful tool that offers an assertion library for the tests. It has man
 Among the options that I found to create loading tests, this one caught my eye because of its simplicity for a developer to create the tests. Using the same structure of the system (node) it was quick and easy to create some testing scenarios to evaluate the system's performance. Of course, it demands more study to understand each metric and how to configure each test properly, but it was very straightforward to create the scenarios.
 
 ## How long did you spend on this exercise? If you had unlimited more time to spend on this, how would you spend it and how would you prioritize each item?
-Around 15h. First I would prioritize the preprocess, because depending on the size of the file it takes a long time, maybe use another tool just to process the file in chunks asynchronously. After that, I would invest some time on the webserver, specifically in the infra part creating more than one instance for the system and adding a load balancer to them. Last but not least I think it would be nice to improve the load tests and the unit testing, creating more scenarios and organizing better the load tests.
+Around 17h. First I would prioritize the preprocess, because depending on the size of the file it takes a long time, maybe use another tool just to process the file in chunks asynchronously. After that, I would invest some time on the webserver, specifically in the infra part creating more than one instance for the system and adding a load balancer to them. Last but not least I think it would be nice to improve the load tests and the unit testing, creating more scenarios and organizing better the load tests.
 
 ## If you were to critique your code, what would you have to say about it?
 In my opinion, it would be better to use a database to store the data of the file, which could be SQL or NoSQL. For this scenario I think a NoSQL would fit better since there is no relation between the data and the key is well established. Besides, node is not the best choice when processing large files, so changing it to another language could improve the time to preprocess the file.

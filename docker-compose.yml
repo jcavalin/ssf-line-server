@@ -1,15 +1,16 @@
 version: '3.8'
 
 services:
+
   api:
     build: .
     environment:
       APP_PORT: 80
-    ports:
-      - '80:80'
+      CLUSTER_WORKERS: 4
+    network_mode: 'host'
     deploy:
       resources:
         limits:
           cpus: '4'
-          memory: '1GB'
-    network_mode: 'host'
+          memory: '2GB'
+  
