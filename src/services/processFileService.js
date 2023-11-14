@@ -4,7 +4,7 @@ import fileConfig from '../config/fileConfig.js';
 import nReadlines from 'n-readlines';
 import fs from 'fs';
 
-function preprocessFile(filePath, fromLine, toLine) {
+function preprocessFile(filePath) {
     let liner;
     
     try {
@@ -17,17 +17,7 @@ function preprocessFile(filePath, fromLine, toLine) {
     let lineNumber = 1;
     let lineContent;
     let subdirectory;
-    while (lineContent = liner.next()) {
-
-        if (fromLine && lineNumber < fromLine) {
-            lineNumber++;
-            continue;
-        }
-
-        if (toLine && lineNumber > toLine) {
-            break;
-        }
-        
+    while (lineContent = liner.next()) {        
         const subdirectoryByLine = getSubdirectoryByLineNumber(lineNumber);
         if (subdirectoryByLine != subdirectory) {
             subdirectory = subdirectoryByLine;
@@ -37,9 +27,7 @@ function preprocessFile(filePath, fromLine, toLine) {
         let fileFullPath = getFullFilePathByLineNumber(lineNumber);
         fs.appendFileSync(fileFullPath, lineContent + '\n');
         
-        if (!(fromLine && toLine)) {
-            showProgress(lineNumber, fileFullPath);
-        }
+        showProgress(lineNumber, fileFullPath);
 
         lineNumber++;
     }

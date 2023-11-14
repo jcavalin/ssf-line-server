@@ -14,43 +14,19 @@ function getLineContent(lineNumber) {
         return null;
     }
     
-    let found = false;
     let lineContent;
     let currentLine = from;
     while (lineContent = liner.next()) {
-        if (lineNumber != currentLine) {
-            currentLine++;
+        if (lineNumber == currentLine) {
+            return lineContent.toString();
         }
         
-        lineContent = lineContent.toString();
-        found = true;
-        break;
+        currentLine++;
     }
 
-    if (!found) {
-        return null;
-    }
-
-    return lineContent;
-}
-
-function countLines(filePath) {
-    let liner;
-    try {
-        liner = new nReadlines(filePath);
-    } catch (e) {
-        return null;
-    }
-    
-    let lineNumber = 0;
-    while (liner.next()) {
-        lineNumber++;
-    }
-
-    return lineNumber;
+    return null;
 }
 
 export {
-    getLineContent,
-    countLines
+    getLineContent
 }
