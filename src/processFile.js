@@ -1,10 +1,10 @@
 import { preprocessFile } from './services/processFileService.js';
 
-console.time('Running time');
-
 const filePath = process.argv[2];
 const fromLine = process.argv[3];
 const toLine = process.argv[4];
+
+console.time((fromLine && toLine ? `[WORKER ${fromLine}_${toLine}] ` : '') + 'Running time');
 
 const log = (log) => console.log(fromLine && toLine ? `[WORKER ${fromLine}_${toLine}] ${log}` : log);
 
@@ -15,7 +15,7 @@ if (!filePath) {
 
 log('Processing file', filePath);
 
-const {lastLineNumber, hasNextLine} = preprocessFile(filePath, fromLine, toLine);
+const lastLineNumber = preprocessFile(filePath, fromLine, toLine);
 
 if (!lastLineNumber) {
     process.exit(1);
@@ -23,9 +23,9 @@ if (!lastLineNumber) {
 
 log('Finished!');
 log(`${lastLineNumber} lines processed`);
-log('Running time');
+console.timeEnd((fromLine && toLine ? `[WORKER ${fromLine}_${toLine}] ` : '') + 'Running time');
 
 const used = process.memoryUsage().heapUsed / 1024 / 1024;
 log(`The script uses approximately ${Math.round(used * 100) / 100} MB`);
 
-process.exit(hasNextLine ? 2 : 1);
+process.exit(0);

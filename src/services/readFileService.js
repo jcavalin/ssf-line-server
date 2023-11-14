@@ -18,13 +18,13 @@ function getLineContent(lineNumber) {
     let lineContent;
     let currentLine = from;
     while (lineContent = liner.next()) {
-        if (lineNumber == currentLine) {
-            lineContent = lineContent.toString();
-            found = true;
-            break;
+        if (lineNumber != currentLine) {
+            currentLine++;
         }
-
-        currentLine++;
+        
+        lineContent = lineContent.toString();
+        found = true;
+        break;
     }
 
     if (!found) {
@@ -34,6 +34,23 @@ function getLineContent(lineNumber) {
     return lineContent;
 }
 
+function countLines(filePath) {
+    let liner;
+    try {
+        liner = new nReadlines(filePath);
+    } catch (e) {
+        return null;
+    }
+    
+    let lineNumber = 0;
+    while (liner.next()) {
+        lineNumber++;
+    }
+
+    return lineNumber;
+}
+
 export {
-    getLineContent
+    getLineContent,
+    countLines
 }
