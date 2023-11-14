@@ -49,7 +49,7 @@ Chai is a useful tool that offers an assertion library for the tests. It has man
 Among the options that I found to create loading tests, this one caught my eye because of its simplicity for a developer to create the tests. Using the same structure of the system (node) it was quick and easy to create some testing scenarios to evaluate the system's performance. Of course, it demands more study to understand each metric and how to configure each test properly, but it was very straightforward to create the scenarios.
 
 ## How long did you spend on this exercise? If you had unlimited more time to spend on this, how would you spend it and how would you prioritize each item?
-Around 17h. First I would prioritize the preprocess, because depending on the size of the file it takes a long time, maybe use another tool just to process the file in chunks asynchronously. After that, I would invest some time on the webserver, specifically in the infra part creating more than one instance for the system and adding a load balancer to them. Last but not least I think it would be nice to improve the load tests and the unit testing, creating more scenarios and organizing better the load tests.
+Around 17 hours. First I would prioritize the preprocess, because depending on the size of the file it takes a long time, maybe use another tool just to process the file in chunks asynchronously. After that, I would invest some time on the webserver, specifically in the infra part creating more than one instance for the system and adding a load balancer to them. Last but not least I think it would be nice to improve the load tests and the unit testing, creating more scenarios and organizing better the load tests.
 
 ## If you were to critique your code, what would you have to say about it?
 In my opinion, it would be better to use a database to store the data of the file, which could be SQL or NoSQL. For this scenario I think a NoSQL would fit better since there is no relation between the data and the key is well established. The database could improve the reliability of storing and getting the data. Besides, node is not the best choice when processing large files, so changing it to another language could improve the time to preprocess the file.
@@ -94,7 +94,7 @@ npm run test
 ./run.sh [filePath]
 ```
 
-### Get line from web server
+### Get line from the web server
 ```
 curl 'http://127.0.0.1/lines/1' -H 'User-Agent: curl' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8' -H 'Accept-Language: en-US,en;q=0.5'  -H 'Accept-Encoding: gzip, deflate, br' -H 'Connection: keep-alive'
 ```

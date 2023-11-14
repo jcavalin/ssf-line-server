@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import { getLineContent } from "../src/services/readFileService.js";
+import { getLineContent } from '../src/services/readFileService.js';
 
 describe('Get line', () => {
     it('Index 1', (done) => {
